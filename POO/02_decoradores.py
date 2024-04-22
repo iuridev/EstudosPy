@@ -9,6 +9,9 @@ class humam:
     def name(self):
         return self._nome or any
     
+    @name.setter
+    def name(self, value):
+        self._nome = value or any
 
 
 humam01 = humam("Iuri")
