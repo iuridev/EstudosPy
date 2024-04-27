@@ -8,10 +8,9 @@ Base = declarative_base()
 
 
 class User(Base):
-    __table_name__ = "user_account"  # create table
-
+    __tablename__ = "user_account"
     # attributes
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String)
     fullname = Column(String)
 
@@ -25,7 +24,9 @@ class User(Base):
 
 
 class Address(Base):
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    __tablename__ = "address"
+
+    id = Column(Integer, primary_key=True)
     email = Column(String(30), nullable=False)
     user_id = Column(Integer, ForeignKey("user_account.id"), nullable=False)
 
