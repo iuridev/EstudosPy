@@ -1,7 +1,7 @@
 # import pymongo
 # import sqlalchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect, select
+from sqlalchemy.orm import declarative_base, relationship, Session
 
 # first pass is to create a Base
 Base = declarative_base()
@@ -50,3 +50,26 @@ inspect_engine = inspect(engine)
 print(inspect_engine.get_table_names())
 
 print(inspect_engine.default_schema_name)
+
+# criar sessão para pesistir dados no SQLite
+with Session(engine) as session:
+    iuri = User(
+        name='iuri',
+        fullname='iuri santos barreto',
+        email_user=[Address(email='iuribarreto.ib@gmail.com')]
+    )
+
+    ian = User(
+        name='ian',
+        fullname='Ian nascimento Souza',
+        email_user=[Address(email='iannascimento@gmail.com'), Address(email='ianbrasilcv@gmail.com')]
+    )
+
+    # envindo para o BD
+    session.add_all([iuri, ian])
+
+    session.commit()
+
+stmt = select(User).where(User.name.in_(["iuri"]))
+for user in session.scalars(stmt):
+    print(user)
