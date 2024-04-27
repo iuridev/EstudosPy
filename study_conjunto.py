@@ -1,6 +1,6 @@
 #uma lista porém que não tem valores repetidos e não é possivel recuperar valor
 
-conjunto_a = set((10,55,20))
+conjunto_a = {10, 55, 20}
 
 conjunto_b = {10, 40, 60}
 

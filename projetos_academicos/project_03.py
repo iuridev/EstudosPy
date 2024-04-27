@@ -8,10 +8,12 @@ from project_03 import Historico, Transacao
 class Cliente():
     _endereço : str
     _contas : list
-    def realizar_transacao():
+    def realizar_transacao(self):
+        print("realizando transação")
         pass
 
-    def add_conta():
+    def add_conta(self):
+        print("realizando criação de conta")
         pass
 
 class Pessoa_Fisica(Cliente):

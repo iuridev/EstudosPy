@@ -1,6 +1,6 @@
 # import pymongo
 # import sqlalchemy
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect
 from sqlalchemy.orm import declarative_base, relationship
 
 # first pass is to create a Base
@@ -37,3 +37,16 @@ class Address(Base):
 
     def __repr__(self):
         return f"Address( id: {self.id}, Email: {self.email})"
+
+
+# CONEXÃO COM BANCO DE DADOS : SQLITE
+engine = create_engine("sqlite://")
+
+# CRIANDO AS TABELAS NO BANCO DE DADOS - USANDO AS CLASSES QUE CRIAMOS ANTERIOMENTE
+Base.metadata.create_all(engine)
+
+inspect_engine = inspect(engine)
+
+print(inspect_engine.get_table_names())
+
+print(inspect_engine.default_schema_name)
