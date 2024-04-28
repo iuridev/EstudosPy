@@ -1,6 +1,6 @@
 # import pymongo
 # import sqlalchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect, select, func
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect, select, func, text
 from sqlalchemy.orm import declarative_base, relationship, Session
 
 # first pass is to create a Base
@@ -106,3 +106,6 @@ for result_count_users in session.scalars(stmt_count_users):
     x = result_count_users
 
 print(f'Total de {x} usuarios cadastrados')
+
+
+session.close()
