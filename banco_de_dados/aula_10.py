@@ -1,6 +1,6 @@
 # import pymongo
 # import sqlalchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect, select
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, inspect, select, func
 from sqlalchemy.orm import declarative_base, relationship, Session
 
 # first pass is to create a Base
@@ -61,15 +61,48 @@ with Session(engine) as session:
 
     ian = User(
         name='ian',
-        fullname='Ian nascimento Souza',
+        fullname='ian nascimento Souza',
         email_user=[Address(email='iannascimento@gmail.com'), Address(email='ianbrasilcv@gmail.com')]
     )
 
-    # envindo para o BD
-    session.add_all([iuri, ian])
+    bruna = User(
+        name='bruna',
+        fullname='bruna nascimento Castro',
+        email_user=[Address(email='brubru@gmail.com')]
+    )
+
+    # send to BD
+    session.add_all([iuri, ian, bruna])
 
     session.commit()
 
+
+# searching in database
 stmt = select(User).where(User.name.in_(["iuri"]))
 for user in session.scalars(stmt):
     print(user)
+
+print("\n################ NEXT EXAMPLE ###########################n\n")
+
+# select all user order by name
+order_Users = select(User).order_by(User.fullname.asc())
+for order in session.scalars(order_Users):
+    print(order)
+
+print("\n################ NEXT EXAMPLE ###########################n\n")
+
+# select all users and them e-mails
+stmt_join = select(User.fullname, Address.email).join_from(Address, User)
+connection = engine.connect()
+result = connection.execute(stmt_join).fetchall()
+for result_join in result:
+    print(result_join)
+
+
+print("\n################ NEXT EXAMPLE ###########################n\n")
+x = 0
+stmt_count_users = select(func.count('*')).select_from(User)
+for result_count_users in session.scalars(stmt_count_users):
+    x = result_count_users
+
+print(f'Total de {x} usuarios cadastrados')
