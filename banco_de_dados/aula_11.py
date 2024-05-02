@@ -26,4 +26,7 @@ print(post_id)
 
 print(db.posts.find_one())
 pprint.pprint(db.posts.find_one())
-# bd
+
+# find many in bd
+for gets_all in posts.find():
+    pprint.pprint(gets_all)
