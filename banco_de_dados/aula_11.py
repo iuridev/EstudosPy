@@ -26,3 +26,4 @@ print(post_id)
 
 print(db.posts.find_one())
 pprint.pprint(db.posts.find_one())
+# bd
