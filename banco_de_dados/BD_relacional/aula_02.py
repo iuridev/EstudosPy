@@ -6,5 +6,6 @@ conexao = sqlite3.connect(ROOT_PATH / 'bd_studying.db')
 
 cursor = conexao.cursor()
 
-cursor.execute(
-    'CREATE TABLE clientes (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(100), email VARCHAR(150))')
+data = ('maria', 'mariasantos223@gmail.com')
+cursor.execute('INSERT INTO clientes (nome, email) VALUES (?,?)', data)
+conexao.commit()

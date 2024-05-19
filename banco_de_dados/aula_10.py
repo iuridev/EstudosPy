@@ -62,7 +62,8 @@ with Session(engine) as session:
     ian = User(
         name='ian',
         fullname='ian nascimento Souza',
-        email_user=[Address(email='iannascimento@gmail.com'), Address(email='ianbrasilcv@gmail.com')]
+        email_user=[Address(email='iannascimento@gmail.com'),
+                    Address(email='ianbrasilcv@gmail.com')]
     )
 
     bruna = User(
