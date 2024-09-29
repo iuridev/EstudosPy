@@ -8,28 +8,39 @@ class Locadora:
         pass
 
     def __str__(self):
-        return self._name
+        _alterado = "Novo Valor" + self._name
+        return print(f"{_alterado}")
 
-    def List_Locadoras(self):
+    @classmethod
+    def List_Locadoras(cls):
         print("--- LISTA DE LOCADORAS ---")
-        for loc in self._locadoras:
+        print(f"{'Nome da Locadora'.ljust(25)} | {'Status do Cadastro'}")
+        for loc in cls._locadoras:
             # print(vars(loc))
             # loc.ativo vai ativar a @property
-            print(f"Biblioteca: {loc._name} | {loc.ativo}")
+            print(f"{loc._name.ljust(25)} | {loc.ativo}")
 
     def altera_estado(self):
         self._ativo = not self._ativo
+
+    def altera_nome(self, new_name):
+        self._name = new_name
 
     @property
     def ativo(self):
         return "ativado" if self._ativo else "desativado"
 
 
+# corpo :
+
 locadora_1 = Locadora("LocaWeb")
 locacora_2 = Locadora("LocaMAX")
 locadora_3 = Locadora("NetFlix")
 
-Locadora.List_Locadoras(Locadora)
+Locadora.List_Locadoras()
 locacora_2.altera_estado()
 
-Locadora.List_Locadoras(Locadora)
+Locadora.List_Locadoras()
+
+locadora_3.altera_nome("NewFlix")
+Locadora.List_Locadoras()
